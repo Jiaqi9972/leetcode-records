@@ -7,7 +7,7 @@ export default function AboutComponent() {
         <div>
           This application is a very simple demo. Not perfect but works well
           now. It helps me to record my leetcode. You can also use it, of course
-          it's open source. But you really do lol?
+          it&apos;s open source. But you really do lol?
         </div>
         <div>
           In July or August, or maybe later, I wanted to write a simple website
@@ -21,15 +21,15 @@ export default function AboutComponent() {
         </div>
         <div>
           Next.js is a very powerful framework, easy to route the page, easy to
-          deploy, but how can I make the best practice? I've been thinking this
-          for serveral months, but i'm still confused. All I can do is to make
-          demos and try. At first, I even don't know how to use context and ui
-          library. But now I can. I also got some experiences to use client and
-          server functions to render different part of my pages. I learned how
-          to use nextauth, firebase, cognito to secure the api. I learned how to
-          use serverless API and middlewire. I learned how to use GraphQL. I
-          almost begin to like JavaScript. I don't need to create a heavy server
-          like Spring Boot.
+          deploy, but how can I make the best practice? I&apos;ve been thinking
+          this for serveral months, but i&apos;m still confused. All I can do is
+          to make demos and try. At first, I even don&apos;t know how to use
+          context and ui library. But now I can. I also got some experiences to
+          use client and server functions to render different part of my pages.
+          I learned how to use nextauth, firebase, cognito to secure the api. I
+          learned how to use serverless API and middlewire. I learned how to use
+          GraphQL. I almost begin to like JavaScript. I don&apos;t need to
+          create a heavy server like Spring Boot.
         </div>
         <ul className="flex flex-col gap-4">
           <div className="text-2xl">For those who wants to try this demo.</div>
