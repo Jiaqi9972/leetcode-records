@@ -79,8 +79,8 @@ export default function DailyRecords({ records }) {
           <CardDescription>Not bad huh.</CardDescription>
         ) : (
           <CardDescription>
-            What?? You haven't done a single problem today? Get back to studying
-            right now!
+            What?? You haven&apos;t done a single problem today? Get back to
+            studying right now!
           </CardDescription>
         )}
       </CardHeader>
