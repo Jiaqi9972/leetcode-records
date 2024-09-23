@@ -154,13 +154,12 @@ export default function ProblemForm() {
     }
 
     if (data.date) {
-      console.log(data.date);
       const selectedDate = parse(data.date, "yyyy-MM-dd", new Date()); // Parses as local time
       data.date = formatISO(selectedDate); // Formats to ISO string with local time
-      console.log(data.date);
     }
 
     const token = await user.getIdToken();
+
     try {
       const response = await fetch("/api/add-record", {
         method: "POST",
@@ -199,6 +198,8 @@ export default function ProblemForm() {
       });
       return;
     }
+
+    const token = await user.getIdToken();
 
     const file = data.file[0];
     if (!file) {
@@ -244,11 +245,17 @@ export default function ProblemForm() {
             remarks,
           };
 
+          if (payload.date) {
+            const selectedDate = parse(payload.date, "yyyy-MM-dd", new Date()); // Parses as local time
+            payload.date = formatISO(selectedDate); // Formats to ISO string with local time
+          }
+
           try {
             const response = await fetch("/api/add-record", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
               },
               body: JSON.stringify(payload),
             });

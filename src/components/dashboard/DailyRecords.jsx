@@ -72,7 +72,6 @@ export default function DailyRecords({ records }) {
             })}
           </div>
           <div className="pb-4">{currentDayRecords.length} problems</div>
-          <Button onClick={() => console.log(currentDate)}>Test</Button>
         </CardTitle>
         {currentDayRecords.length > 0 ? (
           <CardDescription>Not bad huh.</CardDescription>
@@ -106,9 +105,6 @@ export default function DailyRecords({ records }) {
                 >
                   {record.translated_title}
                 </a>
-              </CardContent>
-              <CardContent>
-                <Button onClick={() => console.log(record)}>test</Button>
               </CardContent>
               <CardContent>Remarks: {record.remarks}</CardContent>
               {user && (
