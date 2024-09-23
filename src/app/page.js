@@ -19,15 +19,15 @@ export default async function DashboardComponent() {
     ORDER BY pr.date ASC
   `);
 
-  const records = result.rows.map((record) => {
-    // Assuming 'date' is the date field from your record
-    // const utcDate = new Date(record.date);
-    const zonedDate = toZonedTime(record.date, timeZone);
-    return {
-      ...record,
-      date: zonedDate,
-    };
-  });
+  // const records = result.rows.map((record) => {
+  //   // Assuming 'date' is the date field from your record
+  //   // const utcDate = new Date(record.date);
+  //   const zonedDate = toZonedTime(record.date, timeZone);
+  //   return {
+  //     ...record,
+  //     date: zonedDate,
+  //   };
+  // });
 
   return (
     <div className="flex flex-col md:flex-row p-4">
