@@ -289,6 +289,67 @@ export default function ProblemForm() {
     });
   };
 
+  /*
+      Download records
+  */
+  async function downloadCSV() {
+    try {
+      // Fetch the records from the API
+      const response = await fetch("/api/get-records");
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch records");
+      }
+
+      const records = await response.json();
+
+      // Create the CSV header
+      const header =
+        "problem_id,cn_link,en_link,title,translated_title,difficulty,date,remarks\n";
+
+      // Create the CSV rows
+      const rows = records
+        .map((record) => {
+          const {
+            problem_id,
+            cn_link,
+            en_link,
+            title,
+            translated_title,
+            difficulty,
+            date,
+            remarks,
+          } = record;
+
+          // Format each field as needed and concatenate them into a single string for each row
+          return `${problem_id},${cn_link},${en_link},${title},${translated_title},${difficulty},${
+            new Date(date).toISOString().split("T")[0]
+          },${remarks || ""}`;
+        })
+        .join("\n");
+
+      // Combine the header and the rows
+      const csvContent = header + rows;
+
+      // Create a Blob object to store the CSV data
+      const blob = new Blob([csvContent], { type: "text/csv" });
+
+      // Create a link element to trigger the download
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = "problem_records.csv";
+
+      // Append the link to the body and trigger the download
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+
+      // Clean up by removing the link
+      document.body.removeChild(downloadLink);
+    } catch (error) {
+      console.error("Error downloading CSV:", error);
+    }
+  }
+
   return (
     <div className="flex flex-col md:flex-row gap-4">
       <Card className="w-full md:w-1/2 relative">
@@ -482,7 +543,9 @@ export default function ProblemForm() {
               problem_id,cn_link,en_link,title,translated_title,difficulty,date,remarks
             </div>
           </CardContent>
-          <Button className="absolute top-4 right-4">Download</Button>
+          <Button className="absolute top-4 right-4" onClick={downloadCSV}>
+            Download
+          </Button>
         </Card>
       </div>
     </div>
