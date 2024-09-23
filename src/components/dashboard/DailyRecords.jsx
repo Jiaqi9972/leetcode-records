@@ -107,6 +107,9 @@ export default function DailyRecords({ records }) {
                   {record.translated_title}
                 </a>
               </CardContent>
+              <CardContent>
+                <Button onClick={() => console.log(record)}>test</Button>
+              </CardContent>
               <CardContent>Remarks: {record.remarks}</CardContent>
               {user && (
                 <AlertDialog>
