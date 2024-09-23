@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import CalendarComponent from "@/components/dashboard/CalendarComponent";
 import Counts from "@/components/dashboard/Counts";
 import RecordsChart from "@/components/dashboard/RecordsChart";
