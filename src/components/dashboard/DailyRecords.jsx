@@ -24,7 +24,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { UserContext } from "@/context/UserContext";
-import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
 export default function DailyRecords({ records }) {
@@ -63,7 +62,7 @@ export default function DailyRecords({ records }) {
   };
 
   return (
-    <Card className="flex flex-col pt-4 gap-4 h-[calc(100vh-8rem)] overflow-y-scroll">
+    <Card className="flex flex-col pt-4 gap-4 h-[calc(100vh-8rem)] overflow-y-scroll ">
       <CardHeader>
         <CardTitle>
           <div className="pb-4">

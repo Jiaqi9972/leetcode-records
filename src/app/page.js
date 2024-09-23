@@ -7,15 +7,27 @@ import DailyRecords from "@/components/dashboard/DailyRecords";
 import { query } from "../../db";
 import { Card, CardContent } from "@/components/ui/card";
 import RandomProblem from "@/components/dashboard/RandomProblem";
+import { toZonedTime } from "date-fns-tz";
 
 export default async function DashboardComponent() {
+  const timeZone = "America/Los_Angeles";
+
   const result = await query(`
     SELECT pr.*, p.cn_link, p.en_link, p.title, p.translated_title, p.difficulty
     FROM problem_records pr
     JOIN problem p ON pr.problem_id = p.problem_id
     ORDER BY pr.date ASC
   `);
-  const records = result.rows;
+
+  const records = result.rows.map((record) => {
+    // Assuming 'date' is the date field from your record
+    // const utcDate = new Date(record.date);
+    const zonedDate = toZonedTime(record.date, timeZone);
+    return {
+      ...record,
+      date: zonedDate,
+    };
+  });
 
   return (
     <div className="flex flex-col md:flex-row p-4">
