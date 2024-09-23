@@ -30,8 +30,7 @@ export default function DailyRecords({ records }) {
   const { currentDate } = useContext(DateContext);
 
   const currentDayRecords = records.filter((record) => {
-    const recordDate = new Date(record.date);
-    return isSameDay(recordDate, currentDate);
+    return isSameDay(record.date, currentDate);
   });
 
   const user = useContext(UserContext).user;
@@ -73,6 +72,7 @@ export default function DailyRecords({ records }) {
             })}
           </div>
           <div className="pb-4">{currentDayRecords.length} problems</div>
+          <Button onClick={() => console.log(currentDate)}>Test</Button>
         </CardTitle>
         {currentDayRecords.length > 0 ? (
           <CardDescription>Not bad huh.</CardDescription>

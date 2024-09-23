@@ -23,7 +23,7 @@ export default function Counts({ records }) {
     };
 
     records?.forEach((record) => {
-      const date = new Date(record.date);
+      const date = record.date;
       const monthKey = date.toISOString().slice(0, 7);
       const difficulty = record.difficulty.toLowerCase();
 

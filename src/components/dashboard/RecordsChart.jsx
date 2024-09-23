@@ -38,7 +38,7 @@ export default function RecordsChart({ records }) {
   const chartData = useMemo(() => {
     // Filter records for the current month
     const filteredRecords = records.filter((record) => {
-      const recordDate = new Date(record.date);
+      const recordDate = record.date;
       return (
         recordDate.getFullYear() === currentMonth.getFullYear() &&
         recordDate.getMonth() === currentMonth.getMonth()
@@ -47,7 +47,7 @@ export default function RecordsChart({ records }) {
 
     // Map dates to counts
     const dateCountMap = filteredRecords.reduce((acc, record) => {
-      const dateKey = format(new Date(record.date), "yyyy-MM-dd");
+      const dateKey = format(record.date, "yyyy-MM-dd");
       acc[dateKey] = (acc[dateKey] || 0) + 1;
       return acc;
     }, {});
