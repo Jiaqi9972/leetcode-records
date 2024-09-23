@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "@/components/ui/textarea";
 import { useContext, useEffect } from "react";
-import { format } from "date-fns";
+import { format, formatISO, parse } from "date-fns";
 import Papa from "papaparse";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -152,6 +152,14 @@ export default function ProblemForm() {
       });
       return;
     }
+
+    if (data.date) {
+      console.log(data.date);
+      const selectedDate = parse(data.date, "yyyy-MM-dd", new Date()); // Parses as local time
+      data.date = formatISO(selectedDate); // Formats to ISO string with local time
+      console.log(data.date);
+    }
+
     const token = await user.getIdToken();
     try {
       const response = await fetch("/api/add-record", {
