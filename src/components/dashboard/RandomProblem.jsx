@@ -39,7 +39,7 @@ export default function RandomProblem({ records }) {
         <AlertDialogContent className="sm:max-w-[425px]">
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2 text-xl">
-              Problem {randomProblem.id}
+              Problem {randomProblem.problem_id}
               <Badge variant={randomProblem.difficulty.toLowerCase()}>
                 {randomProblem.difficulty}
               </Badge>
