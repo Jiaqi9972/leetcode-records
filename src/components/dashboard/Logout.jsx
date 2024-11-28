@@ -20,7 +20,7 @@ export default function Logout() {
       <Button
         size="icon"
         variant="outline"
-        className="absolute right-2 md:left-2 bottom-2"
+        className="absolute right-2 top-2"
         onClick={handleLogout}
       >
         <LogOut />

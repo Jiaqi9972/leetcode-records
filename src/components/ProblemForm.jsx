@@ -412,24 +412,38 @@ export default function ProblemForm() {
                     />
                   </div>
 
-                  {/* Remarks Section */}
-                  <FormField
-                    control={recordForm.control}
-                    name="remarks"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Remarks</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Enter remarks"
-                            className="min-h-[100px]"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  {/* Title Section */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={recordForm.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Title</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter title" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={recordForm.control}
+                      name="translatedTitle"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Translated Title</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter translated title"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
                   {/* Problem Details Section */}
                   <div className="grid sm:grid-cols-3 gap-4">
@@ -474,38 +488,24 @@ export default function ProblemForm() {
                     />
                   </div>
 
-                  {/* Title Section */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <FormField
-                      control={recordForm.control}
-                      name="title"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Title</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Enter title" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={recordForm.control}
-                      name="translatedTitle"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Translated Title</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter translated title"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  {/* Remarks Section */}
+                  <FormField
+                    control={recordForm.control}
+                    name="remarks"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Remarks</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Enter remarks"
+                            className="min-h-[100px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </form>
               </Form>
             </CardContent>
@@ -553,20 +553,22 @@ export default function ProblemForm() {
           </Card>
 
           <Card>
-            <CardHeader className="relative">
+            <CardHeader>
               <CardTitle>Download your records</CardTitle>
               <CardDescription>
                 Download your records as a csv file.
               </CardDescription>
-              <Button className="absolute right-4 top-4" onClick={downloadCSV}>
-                Download
-              </Button>
             </CardHeader>
             <CardContent>
               <div>The csv file format is:</div>
               <div className="text-sm mt-2 break-words text-primary font-mono">
                 problem_id,cn_link,en_link,title,translated_title,difficulty,date,remarks
               </div>
+            </CardContent>
+            <CardContent>
+              <Button className="w-full" onClick={downloadCSV}>
+                Download
+              </Button>
             </CardContent>
           </Card>
         </div>
