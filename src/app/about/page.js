@@ -1,6 +1,6 @@
 export default function AboutComponent() {
   return (
-    <div className="flex flex-col p-4 min-h-screen text-primary">
+    <div className="flex flex-col p-4 min-h-[calc(100vh-4rem)] text-primary">
       <div className="flex flex-col p-4 gap-4">
         <div className="text-3xl pb-8">About</div>
         <div className="text-2xl">To my friend who is watching this page.</div>

@@ -14,7 +14,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { Link2, Trash2 } from "lucide-react";
 import { isSameDay } from "date-fns";
 import {
   Card,
@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import { UserContext } from "@/context/UserContext";
 import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
 
 export default function DailyRecords({ records }) {
   const { currentDate } = useContext(DateContext);
@@ -61,7 +62,7 @@ export default function DailyRecords({ records }) {
   };
 
   return (
-    <Card className="flex flex-col pt-4 gap-4 h-[calc(100vh-8rem)] overflow-y-scroll ">
+    <Card className="flex flex-col pt-4 gap-4 h-[calc(100vh-12rem)] overflow-y-scroll ">
       <CardHeader>
         <CardTitle>
           <div className="pb-4">
@@ -85,53 +86,37 @@ export default function DailyRecords({ records }) {
       {currentDayRecords.length > 0 ? (
         currentDayRecords.map((record) => (
           <CardContent key={record.id}>
-            <Card key={record.id} className="relative bg-background">
-              <CardHeader>
-                <CardTitle>{record.problem_id}</CardTitle>
-                <CardDescription>{record.difficulty}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-row flex-wrap gap-8">
-                <a
-                  href={record.en_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {record.title}
-                </a>
-                <a
-                  href={record.cn_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {record.translated_title}
-                </a>
-              </CardContent>
-              <CardContent>Remarks: {record.remarks}</CardContent>
+            <Card
+              key={record.id}
+              className="relative bg-background hover:shadow-md transition-shadow"
+            >
+              {/* Delete Button */}
               {user && (
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="absolute top-2 right-2"
+                      className="absolute top-4 right-4 text-muted-foreground hover:text-destructive"
                     >
-                      <Trash2 />
+                      <Trash2 className="h-4 w-4" />
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you sure you want to delete this record?
+                      <AlertDialogTitle className="text-xl">
+                        Delete Record
                       </AlertDialogTitle>
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your record.
+                        Are you sure you want to delete this record? This action
+                        cannot be undone.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <AlertDialogAction
                         onClick={() => deleteRecord(record.id)}
+                        className="bg-destructive hover:bg-destructive/90"
                       >
                         Delete
                       </AlertDialogAction>
@@ -139,6 +124,59 @@ export default function DailyRecords({ records }) {
                   </AlertDialogContent>
                 </AlertDialog>
               )}
+
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <CardTitle className="text-xl">
+                    Problem {record.problem_id}
+                  </CardTitle>
+                  <Badge variant={record.difficulty.toLowerCase()}>
+                    {record.difficulty}
+                  </Badge>
+                </div>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-muted-foreground">
+                      EN Version
+                    </p>
+                    <a
+                      href={record.en_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-primary hover:underline"
+                    >
+                      <Link2 className="h-4 w-4" />
+                      {record.title}
+                    </a>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-muted-foreground">
+                      CN Version
+                    </p>
+                    <a
+                      href={record.cn_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-primary hover:underline"
+                    >
+                      <Link2 className="h-4 w-4" />
+                      {record.translated_title}
+                    </a>
+                  </div>
+                </div>
+
+                {record.remarks && (
+                  <div className="pt-2">
+                    <p className="text-sm font-medium text-muted-foreground mb-1">
+                      Remarks
+                    </p>
+                    <p className="text-sm">{record.remarks}</p>
+                  </div>
+                )}
+              </CardContent>
             </Card>
           </CardContent>
         ))

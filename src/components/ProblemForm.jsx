@@ -351,202 +351,225 @@ export default function ProblemForm() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      <Card className="w-full md:w-1/2 relative">
-        <CardHeader>
-          <CardTitle>Add single request</CardTitle>
-          <CardDescription>
-            Paste the leetcode link in the form.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...recordForm}>
-            <form
-              onSubmit={recordForm.handleSubmit(onSubmitRecord)}
-              className="space-y-4"
-            >
-              <div className="flex flex-row gap-4">
-                <FormField
-                  control={recordForm.control}
-                  name="cnLink"
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>CN Link</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Paste CN leetcode link here."
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={recordForm.control}
-                  name="enLink"
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>EN Link</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Paste US leetcode link here."
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <FormField
-                control={recordForm.control}
-                name="remarks"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Remarks</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Enter remarks" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex flex-row gap-4">
-                <FormField
-                  control={recordForm.control}
-                  name="problemId"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Problem ID</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter problem ID" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={recordForm.control}
-                  name="difficulty"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Difficulty</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={recordForm.control}
-                  name="date"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Date</FormLabel>
-                      <FormControl>
-                        <Input type="date" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="flex flex-row gap-4">
-                <FormField
-                  control={recordForm.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>Title</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter title" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={recordForm.control}
-                  name="translatedTitle"
-                  render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>Translated Title</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter translated title"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <Button type="submit" className="absolute top-2 right-8">
+    <div className="w-full overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4">
+        {/* Left column - Main Form */}
+        <div className="md:col-span-8">
+          <Card className="h-full">
+            <CardHeader className="relative">
+              <CardTitle>Add single request</CardTitle>
+              <CardDescription>
+                Paste the leetcode link in the form.
+              </CardDescription>
+              <Button
+                type="submit"
+                form="record-form"
+                className="absolute right-4 top-4"
+              >
                 Submit
               </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+            </CardHeader>
+            <CardContent>
+              <Form {...recordForm}>
+                <form
+                  id="record-form"
+                  onSubmit={recordForm.handleSubmit(onSubmitRecord)}
+                  className="space-y-6"
+                >
+                  {/* Links Section */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={recordForm.control}
+                      name="cnLink"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>CN Link</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Paste CN leetcode link here."
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={recordForm.control}
+                      name="enLink"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>EN Link</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Paste US leetcode link here."
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-      <div className="w-full md:w-1/3 flex flex-col gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Add records with csv file</CardTitle>
-            <CardDescription>
-              Upload csv file at one time with all you records.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Form {...fileForm}>
-              <form
-                onSubmit={fileForm.handleSubmit(onSubmitFile)}
-                className="space-y-4"
-              >
-                <FormField
-                  control={fileForm.control}
-                  name="file"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Upload CSV File</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="file"
-                          accept=".csv"
-                          onChange={(e) => {
-                            field.onChange(e.target.files);
-                          }}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit">Upload and Process File</Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
-        <Card className="relative">
-          <CardHeader>
-            <CardTitle>Download your records</CardTitle>
-            <CardDescription>
-              Download your records as a csv file.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div>The csv file format is:</div>
-            <div className="text-xl break-words text-primary">
-              problem_id,cn_link,en_link,title,translated_title,difficulty,date,remarks
-            </div>
-          </CardContent>
-          <Button className="absolute top-4 right-4" onClick={downloadCSV}>
-            Download
-          </Button>
-        </Card>
+                  {/* Remarks Section */}
+                  <FormField
+                    control={recordForm.control}
+                    name="remarks"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Remarks</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Enter remarks"
+                            className="min-h-[100px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Problem Details Section */}
+                  <div className="grid sm:grid-cols-3 gap-4">
+                    <FormField
+                      control={recordForm.control}
+                      name="problemId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Problem ID</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter problem ID" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={recordForm.control}
+                      name="difficulty"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Difficulty</FormLabel>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={recordForm.control}
+                      name="date"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Date</FormLabel>
+                          <FormControl>
+                            <Input type="date" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Title Section */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={recordForm.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Title</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter title" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={recordForm.control}
+                      name="translatedTitle"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Translated Title</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter translated title"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right column - File Upload and Download */}
+        <div className="md:col-span-4 space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Add records with csv file</CardTitle>
+              <CardDescription>
+                Upload csv file at one time with all you records.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...fileForm}>
+                <form
+                  onSubmit={fileForm.handleSubmit(onSubmitFile)}
+                  className="space-y-4"
+                >
+                  <FormField
+                    control={fileForm.control}
+                    name="file"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Upload CSV File</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="file"
+                            accept=".csv"
+                            onChange={(e) => field.onChange(e.target.files)}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" className="w-full">
+                    Upload and Process File
+                  </Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="relative">
+              <CardTitle>Download your records</CardTitle>
+              <CardDescription>
+                Download your records as a csv file.
+              </CardDescription>
+              <Button className="absolute right-4 top-4" onClick={downloadCSV}>
+                Download
+              </Button>
+            </CardHeader>
+            <CardContent>
+              <div>The csv file format is:</div>
+              <div className="text-sm mt-2 break-words text-primary font-mono">
+                problem_id,cn_link,en_link,title,translated_title,difficulty,date,remarks
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

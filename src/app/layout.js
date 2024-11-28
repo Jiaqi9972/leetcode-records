@@ -18,9 +18,11 @@ export default function RootLayout({ children }) {
       <body className={firaCode.className}>
         <UserProvider>
           <DateProvider>
-            <div className="flex flex-col md:flex-row">
-              <Navigation className="md:w-1/5" />
-              <main className="flex-1">{children}</main>
+            <div className="min-h-screen flex flex-col">
+              <Navigation />
+              <main className="flex-1">
+                <div className="mx-auto w-[90%] md:w-[70%]">{children}</div>
+              </main>
             </div>
           </DateProvider>
           <Toaster />

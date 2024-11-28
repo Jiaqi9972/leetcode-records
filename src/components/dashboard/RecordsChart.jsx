@@ -77,8 +77,8 @@ export default function RecordsChart({ records }) {
   };
 
   return (
-    <Card className="w-full flex flex-1 items-center justify-center">
-      <CardHeader className="w-1/4 text-center">
+    <Card className="w-full flex flex-col items-center">
+      <CardHeader className="w-full text-center">
         <CardTitle>
           <div className="flex justify-center">Solved Problems</div>
         </CardTitle>
@@ -89,13 +89,13 @@ export default function RecordsChart({ records }) {
           })}
         </CardDescription>
       </CardHeader>
-      <CardContent className="w-3/4 ">
+      <CardContent className="w-full h-[330px]">
         <ChartContainer config={chartConfig}>
           <BarChart
             data={chartData}
             margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
             onClick={handleBarClick}
-            className="w-full"
+            className="w-full h-full"
           >
             <CartesianGrid vertical={false} strokeDasharray="3 3" />
             <XAxis
